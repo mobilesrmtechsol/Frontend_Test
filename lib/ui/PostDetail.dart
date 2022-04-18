@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutterpostapi/model/Post.dart';
 import 'package:http/http.dart';
 
+/*
+       CreatedBy: Ankit Agrahari
+       CreatedDate: 15/04/2022
+       Description: This class is used to show the details of specific Post.
+*/
 class PostDetail extends StatelessWidget {
   final Post mPost;
   const PostDetail({required this.mPost, Key? key}) : super(key: key);

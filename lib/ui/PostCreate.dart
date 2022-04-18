@@ -10,6 +10,11 @@ import '/utility/Constant.dart' as constant;
 import 'package:http/http.dart' as http;
 import '../utility/ApiConstant.dart' as api_constant;
 
+/*
+       CreatedBy: Ankit Agrahari
+       CreatedDate: 15/04/2022
+       Description: This class is used to create new Post on Server.
+*/
 class PostCreate extends StatelessWidget {
   const PostCreate({Key? key}) : super(key: key);
 
@@ -44,7 +49,7 @@ class PostCreateState extends State<PostCreatePage> {
   @override
   void initState() {
     super.initState();
-
+    //Checking Internet Connection
     Utils.checkInternet().then((value) {
       if (value != null && value) {
         fetchUserList();
@@ -123,10 +128,11 @@ class PostCreateState extends State<PostCreatePage> {
 
   }
 
-
   /*
-  This method perform validation on fields and create the request to call API.
-   */
+        CreatedBy: Ankit Agrahari
+        CreatedDate: 15/04/2022
+        Description: This method perform validation on fields and create the request to call API.
+  */
   Future<void> onSubmit(BuildContext context) async {
     bool isValidate = true;
     if (titleEditing.text.toString() == "") {
@@ -163,8 +169,10 @@ class PostCreateState extends State<PostCreatePage> {
   }
 
   /*
-  This method used to upload the post on server
-   */
+        createdBy: Ankit Agrahari
+        createdDate: 15/04/2022
+        Description: This method used to upload the post data on server.
+  */
   void createPostApi(String request) async {
     print(request);
     http.Response res = await http.post(Uri.parse(api_constant.postApi), headers: <String, String>{
@@ -174,17 +182,20 @@ class PostCreateState extends State<PostCreatePage> {
     print("code == ${res.statusCode}");
     if(res.statusCode == 201) {
       Utils.showToast("Post is created successfully");
-      Navigator.pop(context);
+      FocusScope.of(context).requestFocus(FocusNode());
+      Navigator.of(context, rootNavigator: true).pop();
       Navigator.pop(context);
     }
     else {
       Utils.showToast("Unable to Create new Post");
-      Navigator.pop(context);
+      Navigator.of(context, rootNavigator: true).pop();
     }
   }
 
   /*
-      This method show the loader while calling API.
+        createdBy: Ankit Agrahari
+        createdDate: 15/04/2022
+        Description: This method show the loader while calling API.
   */
   showLoaderDialog(BuildContext mContext) {
     AlertDialog alert=AlertDialog(
@@ -203,7 +214,9 @@ class PostCreateState extends State<PostCreatePage> {
   }
 
     /*
-      This method fetch User List from server and bind that list in DropDown field.
+         CreatedBy: Ankit Agrahari
+         CreatedDate: 15/04/2022
+         Description: This method fetch User List from server and bind that list in DropDown field.
     */
     fetchUserList() async {
       final response = await http.get(Uri.parse(api_constant.userApi));

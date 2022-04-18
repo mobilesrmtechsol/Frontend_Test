@@ -11,6 +11,11 @@ import '../utility/Constant.dart' as constant;
 import 'package:http/http.dart' as http;
 import '../utility/ApiConstant.dart' as api_constant;
 
+/*
+       CreatedBy: Ankit Agrahari
+       CreatedDate: 18/04/2022
+       Description: This class is used to update Post data on Server.
+*/
 class EditPost extends StatelessWidget {
   final Post mPost;
   const EditPost({required this.mPost, Key? key}) : super(key: key);
@@ -118,8 +123,11 @@ class PostEditState extends State<PostEditPage> {
     ));
   }
 
+
   /*
-    This method used to validate the input field and internet connection check.
+        CreatedBy: Ankit Agrahari
+        CreatedDate: 18/04/2022
+        Description: This method used to validate the input field and internet connection check.
    */
   Future<void> onSubmit(BuildContext context) async {
     bool isValidate = true;
@@ -152,31 +160,36 @@ class PostEditState extends State<PostEditPage> {
     }
   }
 
-  /*
-      This method used to update the Post in API
-  */
+    /*
+        CreatedBy: Ankit Agrahari
+        CreatedDate: 18/04/2022
+        Description: This method used to update the Post data on Server.
+    */
     void updatePostApi(String request, String id) async {
-    print(request);
-    http.Response res = await http.put(Uri.parse('${api_constant.postApi}/$id'), headers: <String, String>{
+      print(request);
+      http.Response res = await http.put(Uri.parse('${api_constant.postApi}/$id'), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-    }, body: request);
-    print(res.body);
+      }, body: request);
+      print(res.body);
 
-    if(res.statusCode == 200) {
+      if(res.statusCode == 200) {
         Map<String, dynamic> map = json.decode(res.body) as Map<String, dynamic>;
         Post p = Post.fromJson(map);
         Utils.showToast("Post is updated successfully");
+        FocusScope.of(context).requestFocus(FocusNode());
+        Navigator.of(context, rootNavigator: true).pop();
         Navigator.pop(context);
-        Navigator.pop(context);
-    }
-    else {
-      Utils.showToast("Unable to upload the data");
-        Navigator.pop(context);
-    }
+      }
+      else {
+        Utils.showToast("Unable to upload the data");
+        Navigator.of(context, rootNavigator: true).pop();
+      }
   }
 
   /*
-     This method used to show loader when calling API
+        CreatedBy: Ankit Agrahari
+        CreatedDate: 18/04/2022
+        Description: This method used to show loader when calling API.
   */
   showLoaderDialog(BuildContext mContext) {
     AlertDialog alert=AlertDialog(
